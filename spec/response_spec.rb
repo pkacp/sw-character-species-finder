@@ -1,9 +1,7 @@
 # TODO expect to have multiple successes and errors inheriting from Response should i test it using shared examples?
 describe Response do
   it 'should initialize with params data and message' do
-    data = ""
-    message = "Too fast"
-    expect(Response.new(data, message)).to be_an_instance_of Response
+    expect(Response.new({data: "fake_data"}, "message")).to be_an_instance_of Response
   end
 
   describe '#message' do
