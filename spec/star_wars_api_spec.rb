@@ -69,10 +69,6 @@ describe StarWarsApi do
         } }
       end
 
-      it 'should be present' do
-        expect(@connector).to respond_to :find_by_name
-      end
-
       it 'should take value' do
         expect(@connector.find_by_name('fake name')).not_to raise_error ArgumentError
       end
@@ -90,21 +86,15 @@ describe StarWarsApi do
       end
 
       it 'should return NotMatching when result name is not exactly matching given string' do
-        stub_request(:get, "https://swapi.dev/api/people/?search=Luk")
+        stub_request(:get, "https://swapi.dev/api/people/?search=Lukee")
             .to_return(body: res_1.to_json)
-        expect(@connector.find_by_name('Luk')).to be_an_instance_of NotMatching
+        expect(@connector.find_by_name('Lukee')).to be_an_instance_of NotMatching
       end
 
       it 'should return object when found 1 matching' do
         stub_request(:get, "https://swapi.dev/api/people/?search=Luke Skywalker")
             .to_return(body: res_1.to_json)
         expect(@connector.find_by_name('Luke Skywalker')).to be_an_instance_of Success
-      end
-
-      it 'should return object when found 1 matching case insensitive' do
-        stub_request(:get, "https://swapi.dev/api/people/?search=luke skywalker")
-            .to_return(body: res_1.to_json)
-        expect(@connector.find_by_name('luke skywalker')).to be_an_instance_of Success
       end
     end
   end
