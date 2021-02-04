@@ -8,7 +8,7 @@ RSpec.describe JediCharacterBuilder do
 
   describe "#add_padawan" do
     it 'should return builder object' do
-      character = Character.new
+      character = instance_double("Character")
       expect(@jedi_builder.add_padawan(character)).to be_an_instance_of described_class
     end
   end
